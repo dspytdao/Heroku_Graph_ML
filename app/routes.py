@@ -50,9 +50,7 @@ def home():
     with gzip.open('arima.pklz', 'wb') as pkl:
         pickle.dump(fitted, pkl)
     
-    files = {'file': open('arima.pklz', 'rb') }
+    files = {'file': gzip.open('arima.pklz', 'rb') }
     response_uploaded = requests.post('https://api.nft.storage/upload', headers=headers, files=files).json()
-
-    
 
     return jsonify({'predictions': list(fc), 'last_date': str(last), 'timestep': str(timestep), 'cid': response_uploaded['value']['cid']})
