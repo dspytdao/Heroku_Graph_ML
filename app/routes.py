@@ -1,12 +1,17 @@
 from app import app
 
-from flask import Flask, request, jsonify
+from flask import request, jsonify
 
+import os
 import requests
 import json
 import pandas as pd
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
+import pickle
+
+headers = {'Content-Type': 'application/json',
+          'Authorization': os.environ.get("API_KEY")}
 
 url ='https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3'
 
@@ -41,4 +46,12 @@ def home():
     # Forecast
     fc = fitted.forecast(f)
 
-    return jsonify({'predictions': list(fc), 'last_date': str(last), 'timestep': str(timestep)})
+    with open('arima.pkl', 'wb') as pkl:
+        pickle.dump(fitted, pkl)
+    
+    files = {'upload_file': open('arima.pkl', 'rb') }
+    response_uploaded = requests.post('https://api.nft.storage/upload', headers=headers, files=files).json()
+
+    
+
+    return jsonify({'predictions': list(fc), 'last_date': str(last), 'timestep': str(timestep), 'cid': response_uploaded['value']['cid']})
