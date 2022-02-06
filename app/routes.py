@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
 import pickle
+import gzip
 
 headers = {'Content-Type': 'application/json',
           'Authorization': os.environ.get("API_KEY")}
@@ -46,10 +47,10 @@ def home():
     # Forecast
     fc = fitted.forecast(f)
 
-    with open('arima.pkl', 'wb') as pkl:
+    with gzip.open('arima.pklz', 'wb') as pkl:
         pickle.dump(fitted, pkl)
     
-    files = {'upload_file': open('arima.pkl', 'rb') }
+    files = {'file': open('arima.pklz', 'rb') }
     response_uploaded = requests.post('https://api.nft.storage/upload', headers=headers, files=files).json()
 
     
