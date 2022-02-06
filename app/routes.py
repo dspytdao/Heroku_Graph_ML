@@ -15,13 +15,16 @@ def home():
         f = int(request.args.get('f'))
     else:
         f=15
-    if request.args.get('q'):
-        q = request.args.get('q')
+    if request.args.get('a'):
+        address = request.args.get('a')
     else:
-        q = """
-        {token (id:"0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"){tokenDayData{priceUSD date}}}
-        """
-    r = requests.post(url, json={'query': q})
+        address = "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
+    
+    query = """
+        {token (id: "%s"){tokenDayData { priceUSD date } } }
+        """ % address
+    
+    r = requests.post(url, json={'query': query})
     json_data = json.loads(r.text)
     
     df_data = json_data['data']['token']['tokenDayData']
