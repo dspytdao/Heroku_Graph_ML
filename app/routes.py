@@ -47,10 +47,11 @@ def home():
     # Forecast
     fc = fitted.forecast(f)
 
-    with gzip.open('arima.pklz', 'wb') as pkl:
-        pickle.dump(fitted, pkl)
+    #with gzip.open('arima.pklz', 'wb') as pkl:
+    #    pickle.dump(fitted, pkl)
     
-    files = {'file': gzip.open('arima.pklz', 'rb') }
-    response_uploaded = requests.post('https://api.nft.storage/upload', headers=headers, files=files).json()
+    #files = {'file': gzip.open('arima.pklz', 'rb') }
+    #response_uploaded = requests.post('https://api.nft.storage/upload', headers=headers, files=files).json()
 
-    return jsonify({'predictions': list(fc), 'last_date': str(last), 'timestep': str(timestep), 'cid': response_uploaded['value']['cid']})
+    #return jsonify({'predictions': list(fc), 'last_date': str(last), 'timestep': str(timestep), 'cid': response_uploaded['value']['cid']})
+    return jsonify({'predictions': list(fc), 'last_date': str(last), 'timestep': str(timestep)})
