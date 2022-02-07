@@ -23,3 +23,6 @@ We are also using the app to create a larger app for the Uniswap bounty. The app
 ## Further References
 
 [DSPYT: Time series data – An easy introduction](https://dspyt.com/time-series-data-an-easy-introduction/)
+[DSPYT: Simple Return, Log Return and Volatility easy intro](https://dspyt.com/simple-returns-log-return-and-volatility-simple-introduction/)
+[DSPYT: Advanced Realized Volatility and Quarticity](https://dspyt.com/advanced-realized-volatility-and-quarticity/)
+[DSPYT: Machine Learning simple Sklearn Ensemble](https://dspyt.com/machine-learning-simple-sklearn-ensemble/)
