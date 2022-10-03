@@ -1,20 +1,18 @@
-from app import app
+"""routes"""
+import os
+import json
+import requests
 
 from flask import request, jsonify
 
-import os
-import requests
-import json
 import pandas as pd
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
-import pickle
-import gzip
 
 headers = {'Content-Type': 'application/json',
           'Authorization': os.environ.get("API_KEY")}
 
-url ='https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3'
+URL ='https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3'
 
 @app.route("/", methods=["GET","POST"])
 def home():
@@ -49,7 +47,6 @@ def home():
 
     #with gzip.open('arima.pklz', 'wb') as pkl:
     #    pickle.dump(fitted, pkl)
-    
     #files = {'file': gzip.open('arima.pklz', 'rb') }
     #response_uploaded = requests.post('https://api.nft.storage/upload', headers=headers, files=files).json()
 
